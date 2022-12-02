@@ -85,7 +85,7 @@ mod tests {
 
     #[test]
     fn pt_1_page_example() {
-        let calories = safe_lines("res/page_example.txt").unwrap();
+        let calories = safe_lines("input/page_example_1.txt").unwrap();
         let top_calories = solution::<1, _, _>(calories).unwrap();
 
         assert_eq!(top_calories, 24_000)
@@ -93,7 +93,7 @@ mod tests {
 
     #[test]
     fn pt_2_page_example() {
-        let calories = safe_lines("res/page_example.txt").unwrap();
+        let calories = safe_lines("input/page_example_1.txt").unwrap();
         let top_calories = solution::<3, _, _>(calories).unwrap();
 
         assert_eq!(top_calories, 45_000)
