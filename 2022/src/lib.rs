@@ -1,0 +1,32 @@
+#![allow(dead_code)]
+use std::fs::File;
+use std::io::{BufRead, BufReader, Result};
+use std::path::Path;
+
+pub mod day1;
+mod errors;
+
+/// ignores an error when reading a line and returns early
+pub fn safe_lines<S: AsRef<Path>>(filename: S) -> Result<impl Iterator<Item = String>> {
+    let file = File::open(filename)?;
+    Ok(BufReader::new(file).lines().map_while(|r| r.ok()))
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{day1::solution, safe_lines};
+
+    #[test]
+    fn day_1_pt_1_solution() {
+        let calories = safe_lines("res/day_1_input.txt").unwrap();
+        let top_calories = solution::<1, _, _>(calories).unwrap();
+        println!("Day 1 Part 1: {}", top_calories)
+    }
+
+    #[test]
+    fn day_1_pt_2_solution() {
+        let calories = safe_lines("res/day_1_input.txt").unwrap();
+        let top_calories = solution::<3, _, _>(calories).unwrap();
+        println!("Day 1 Part 2: {}", top_calories)
+    }
+}
