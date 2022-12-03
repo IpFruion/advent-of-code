@@ -1,6 +1,6 @@
 use std::ops::Neg;
 
-use crate::errors::Error;
+use advent_of_code::errors::Error;
 
 use super::rps::RPS;
 

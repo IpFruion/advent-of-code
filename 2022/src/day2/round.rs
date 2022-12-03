@@ -1,12 +1,23 @@
+//! Defines a Round to play [RPS] in.
+//!
+//! This is defined as player1 vs player2 `= Round(p1, p2)`
 use std::fmt::Display;
 
-use crate::errors::{Error, Result};
+use advent_of_code::errors::{Error, Result};
 
 use super::{rps::RPS, state::GameState};
 
+/// The structure to house a Round of [RPS].
 pub struct Round(RPS, RPS);
 
 impl Round {
+    /// Creates a new [Round] of [RPS].
+    ///
+    /// Example
+    /// ```
+    /// let round = Round::new(RPS::Rock, RPS::Scissors);
+    ///
+    /// ```
     pub fn new(player1: RPS, player2: RPS) -> Self {
         Round(player1, player2)
     }

@@ -1,4 +1,5 @@
-use advent_of_code_2022::{day1, safe_lines};
+use advent_of_code::safe_lines;
+use advent_of_code_2022::day1;
 use criterion::{criterion_group, criterion_main, Criterion, Throughput};
 
 fn criterion_benchmark(c: &mut Criterion) {

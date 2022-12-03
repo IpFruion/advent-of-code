@@ -1,11 +1,14 @@
-use crate::errors::Result;
+//! Day 2 consists of doing `Rock, Paper or Scissors` with other elves.
+
+use advent_of_code::errors::Result;
 
 use self::round::Round;
 
-mod round;
-mod rps;
-mod state;
+pub mod round;
+pub mod rps;
+pub mod state;
 
+/// The Solution for part 1 of day 2.
 pub fn solution<S: AsRef<str>, I: Iterator<Item = S>>(lines: I) -> Result<usize> {
     lines
         .map(|line| {
@@ -15,6 +18,7 @@ pub fn solution<S: AsRef<str>, I: Iterator<Item = S>>(lines: I) -> Result<usize>
         .sum()
 }
 
+/// The Solution for part 2 of day 2.
 pub fn solution_pt2<S: AsRef<str>, I: Iterator<Item = S>>(lines: I) -> Result<usize> {
     lines
         .map(|line| {
@@ -26,7 +30,8 @@ pub fn solution_pt2<S: AsRef<str>, I: Iterator<Item = S>>(lines: I) -> Result<us
 
 #[cfg(test)]
 mod tests {
-    use crate::safe_lines;
+
+    use advent_of_code::safe_lines;
 
     use super::{round::Round, rps::RPS, solution, solution_pt2};
 

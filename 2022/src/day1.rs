@@ -1,6 +1,7 @@
+//! Day 1 consists of counting the number of calories each elf has and finding the max.
 use std::{cmp::Reverse, collections::BinaryHeap};
 
-use crate::errors::Result;
+use advent_of_code::errors::Result;
 
 fn attempt_push_max(arr: &mut [usize], val: usize) {
     let mut set_max = false;
@@ -79,7 +80,8 @@ pub fn solution_improved<S: AsRef<str>, I: Iterator<Item = S>>(
 
 #[cfg(test)]
 mod tests {
-    use crate::safe_lines;
+
+    use advent_of_code::safe_lines;
 
     use super::*;
 

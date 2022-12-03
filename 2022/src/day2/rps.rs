@@ -1,9 +1,11 @@
+//! Defines the game `Rock, Paper, Scissors` and the scores given for the game.
 use std::ops::{Add, Neg};
 
-use crate::errors::Error;
+use advent_of_code::errors::Error;
 
 use super::state::GameState;
 
+/// The move in the game `RPS`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RPS {
     Rock,
@@ -12,6 +14,7 @@ pub enum RPS {
 }
 
 impl RPS {
+    /// Returns the points associated with each move.
     pub fn points(&self) -> usize {
         match self {
             Self::Rock => 1,
@@ -21,6 +24,12 @@ impl RPS {
     }
 }
 
+/// Converts a character into a move associated with [RPS].
+///
+/// Valid characters are
+/// - `A or X = Rock`
+/// - `B or Y = Paper`
+/// - `C or Z = Scissors`
 impl TryFrom<char> for RPS {
     type Error = Error;
 
@@ -36,6 +45,9 @@ impl TryFrom<char> for RPS {
     }
 }
 
+/// Converts a string into a move associated with [RPS].
+///
+/// See [TryFrom char](#impl-TryFrom<char>-for-RPS) for more details.
 impl TryFrom<&str> for RPS {
     type Error = Error;
 
@@ -50,12 +62,26 @@ impl TryFrom<&str> for RPS {
     }
 }
 
+/// Compares two moves against each other to see who would win.
+///
+/// See [Ord](#impl-Ord-for-RPS) for more details.
 impl PartialOrd for RPS {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
+/// Compares two [RPS] moves against each other to see which will win.
+///
+/// `self > other` implies that self `wins` over `other`
+///
+/// Example
+/// ```
+/// assert!(RPS::Rock > RPS::Scissors);
+/// assert!(RPS::Paper < RPS::Scissors);
+/// assert!(RPS::Rock < RPS::Paper);
+///
+/// ```
 impl Ord for RPS {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         if self.eq(other) {
@@ -70,6 +96,16 @@ impl Ord for RPS {
     }
 }
 
+/// Negation of an [RPS] move is defined as the following.
+///
+/// Let move `a` be `Rock`. `-a` is the opposite of `a` defining `a > -a` or inversely `-a < a`.
+/// This implies `-a` to be Scissors to make the above statement `true`.
+///
+/// Example
+/// defining `Paper < Scissors = Paper = -Scissors`
+/// ```
+/// assert_eq!(RPS::Paper, -RPS::Scissors)
+/// ```
 impl Neg for &RPS {
     type Output = RPS;
 

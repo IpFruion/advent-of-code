@@ -1,21 +1,23 @@
+#![doc(
+    html_logo_url = "http://clipart-library.com/new_gallery/1004202_christmas-tree-transparent-background-png.png"
+)]
 #![allow(dead_code)]
-use std::fs::File;
-use std::io::{BufRead, BufReader, Result};
-use std::path::Path;
+
+//! # 2022 Advent of Code!
+//!
+//! See `README.md` at top of repository for more information
+//!
+//!
 
 pub mod day1;
 pub mod day2;
-mod errors;
-
-/// ignores an error when reading a line and returns early
-pub fn safe_lines<S: AsRef<Path>>(filename: S) -> Result<impl Iterator<Item = String>> {
-    let file = File::open(filename)?;
-    Ok(BufReader::new(file).lines().map_while(|r| r.ok()))
-}
+pub mod day3;
 
 #[cfg(test)]
 mod tests {
-    use crate::{day1, day2, safe_lines};
+    use advent_of_code::safe_lines;
+
+    use crate::{day1, day2};
 
     #[test]
     fn day_1_pt_1() {
