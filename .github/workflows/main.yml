@@ -12,12 +12,18 @@ jobs:
         with:
           toolchain: stable
       - run: cargo test
-  # docs:
-  #   needs: build_and_test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: stable
-  #     - run: cargo 
+  docs:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo doc --no-deps --workspace --release
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: './target/doc/'
+      - name: Deloy to pages
+        id: deployment
+        uses: actions/deploy-pages@v1
