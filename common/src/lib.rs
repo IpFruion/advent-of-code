@@ -11,14 +11,3 @@ pub fn safe_lines<S: AsRef<Path>>(filename: S) -> Result<impl Iterator<Item = St
     let file = File::open(filename)?;
     Ok(BufReader::new(file).lines().map_while(|r| r.ok()))
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
