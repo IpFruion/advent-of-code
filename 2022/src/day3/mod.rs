@@ -32,23 +32,12 @@
 //!     Uppercase item types A through Z have priorities 27 through 52.
 //!
 //! In the above example, the priority of the item type that appears in both compartments of each rucksack is 16 (p), 38 (L), 42 (P), 22 (v), 20 (t), and 19 (s); the sum of these is 157.
-use std::collections::HashSet;
 
 use advent_of_code::errors::{Error, Result};
 
-fn convert_to_priority<C: Into<u32>>(c: C) -> usize {
-    let v = c.into();
-    match v {
-        97..=122 => v as usize - 96,
-        65..=90 => (v as usize - 65) + 27,
-        _ => 0,
-    }
-}
-
-pub fn solution_pt1<S: AsRef<str>, L: Iterator<Item = S>>(lines: L) -> Result<usize> {
+pub fn solution_pt1<S: AsRef<str>, L: Iterator<Item = S>>(lines: L) -> Result<u64> {
     lines
         .map(|line| {
-            // find compartment and report value associated wit character
             let line = line.as_ref();
             let (first_half, second_half) = line.split_at(line.len() / 2);
             if first_half.len() != second_half.len() {
@@ -57,25 +46,11 @@ pub fn solution_pt1<S: AsRef<str>, L: Iterator<Item = S>>(lines: L) -> Result<us
                 ));
             }
 
-            let first_half = first_half.chars();
-            let second_half = second_half.chars();
-            let mut hash = HashSet::new();
-            let mut error = 0;
+            let v1 = encode_line(first_half)?;
+            let v2 = encode_line(second_half)?;
+            let v = decode_value(v1 & v2);
 
-            for v1 in first_half {
-                if !hash.contains(&v1) {
-                    hash.insert(v1);
-                }
-            }
-
-            for v2 in second_half {
-                if hash.contains(&v2) {
-                    error = convert_to_priority(v2);
-                    break;
-                }
-            }
-
-            Ok(error)
+            Ok(v)
         })
         .sum()
 }
