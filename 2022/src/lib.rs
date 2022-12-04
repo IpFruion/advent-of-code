@@ -17,7 +17,7 @@ pub mod day3;
 mod tests {
     use advent_of_code::safe_lines;
 
-    use crate::{day1, day2};
+    use crate::{day1, day2, day3};
 
     #[test]
     fn day_1_pt_1() {
@@ -45,5 +45,19 @@ mod tests {
         let lines = safe_lines("input/day_2.txt").unwrap();
         let score = day2::solution_pt2(lines).unwrap();
         println!("Day 2 Part 2: {}", score)
+    }
+
+    #[test]
+    fn day_3_pt_1() {
+        let lines = safe_lines("input/day_3.txt").unwrap();
+        let score = day3::solution_pt1(lines).unwrap();
+        println!("Day 3 Part 1: {}", score)
+    }
+
+    #[test]
+    fn day_3_pt_2() {
+        let lines = safe_lines("input/day_3.txt").unwrap();
+        let score = day3::solution_pt2(lines).unwrap();
+        println!("Day 3 Part 2: {}", score)
     }
 }
