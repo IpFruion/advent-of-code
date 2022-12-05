@@ -1,10 +1,18 @@
 use std::{
     cmp::Ordering,
     fmt::Debug,
-    ops::{Bound, RangeBounds, RangeInclusive},
+    ops::{RangeBounds, RangeInclusive},
 };
 
 use advent_of_code::errors::{Error, Result};
+
+use self::{
+    bounds::CompareBounds,
+    contains::{Container, Contains},
+};
+
+mod bounds;
+mod contains;
 
 fn into_range(line: &str) -> Result<RangeInclusive<u64>> {
     let (lower_bound, upper_bound) = line
@@ -19,23 +27,6 @@ fn into_range(line: &str) -> Result<RangeInclusive<u64>> {
 pub trait RangeContains<T: ?Sized> {
     fn fully_contains<R: RangeBounds<T>>(&self, r: &R) -> bool;
     fn partially_contains<R: RangeBounds<T>>(&self, r: &R) -> bool;
-}
-
-pub trait CompareBounds<T: PartialOrd<T>> {
-    fn cmp_bounds(&self, b: Bound<T>) -> Option<Ordering>;
-}
-
-impl<T: PartialOrd<T>> CompareBounds<T> for Bound<T> {
-    fn cmp_bounds(&self, b: Bound<T>) -> Option<Ordering> {
-        match (self, b) {
-            (Bound::Unbounded, Bound::Unbounded) => Some(Ordering::Equal),
-            (Bound::Included(lower), Bound::Included(upper))
-            | (Bound::Excluded(lower), Bound::Included(upper))
-            | (Bound::Included(lower), Bound::Excluded(upper))
-            | (Bound::Excluded(lower), Bound::Excluded(upper)) => lower.partial_cmp(&upper),
-            _ => None,
-        }
-    }
 }
 
 impl<T: PartialOrd<T> + Debug> RangeContains<T> for RangeInclusive<T> {
@@ -118,13 +109,9 @@ pub fn solution_pt2<S: AsRef<str>, I: Iterator<Item = S>>(lines: I) -> Result<u6
                 .ok_or(Error::InvalidParseError("no pairing".to_owned()))?;
             let first_pair = into_range(first_pair)?;
             let second_pair = into_range(second_pair)?;
-            let first_contains_second = first_pair.partially_contains(&second_pair);
-            let second_contains_first = second_pair.partially_contains(&first_pair);
-
-            if first_contains_second || second_contains_first {
-                return Ok(1);
-            }
-            Ok(0)
+            let k = Container::contains(&first_pair, &second_pair);
+            // if it partially or fully
+            Ok(k.map(|_| 1).unwrap_or(0))
         })
         .sum()
 }
