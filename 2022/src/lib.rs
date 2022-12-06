@@ -14,12 +14,13 @@ pub mod day2;
 pub mod day3;
 pub mod day4;
 pub mod day5;
+pub mod day6;
 
 #[cfg(test)]
 mod tests {
     use advent_of_code::safe_lines;
 
-    use crate::{day1, day2, day3, day4, day5};
+    use crate::{day1, day2, day3, day4, day5, day6};
 
     #[test]
     fn day_1_pt_1() {
@@ -89,5 +90,21 @@ mod tests {
         let lines = safe_lines("input/day_5.txt").unwrap();
         let values = day5::solution_pt2(lines).unwrap();
         println!("Day 5 Part 2: {}", values)
+    }
+
+    #[test]
+    fn day_6_pt_1() {
+        let mut lines = safe_lines("input/day_6.txt").unwrap();
+        let first_line = lines.next().unwrap();
+        let values = day6::solution(4, &first_line).unwrap();
+        println!("Day 6 Part 1: {}", values)
+    }
+
+    #[test]
+    fn day_6_pt_2() {
+        let mut lines = safe_lines("input/day_6.txt").unwrap();
+        let first_line = lines.next().unwrap();
+        let values = day6::solution(14, &first_line).unwrap();
+        println!("Day 6 Part 2: {}", values)
     }
 }
