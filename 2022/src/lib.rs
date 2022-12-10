@@ -16,12 +16,15 @@ pub mod day4;
 pub mod day5;
 pub mod day6;
 pub mod day7;
+pub mod day8;
+pub mod day9;
+pub mod day_10;
 
 #[cfg(test)]
 mod tests {
     use advent_of_code::safe_lines;
 
-    use crate::{day1, day2, day3, day4, day5, day6, day7};
+    use crate::{day1, day2, day3, day4, day5, day6, day7, day8, day9, day_10};
 
     #[test]
     fn day_1_pt_1() {
@@ -121,5 +124,47 @@ mod tests {
         let lines = safe_lines("input/day_7.txt").unwrap();
         let values = day7::solution_pt2(lines).unwrap();
         println!("Day 7 Part 2: {}", values)
+    }
+
+    #[test]
+    fn day_8_pt_1() {
+        let lines = safe_lines("input/day_8.txt").unwrap();
+        let values = day8::solution_pt1(lines).unwrap();
+        println!("Day 8 Part 1: {}", values)
+    }
+
+    #[test]
+    fn day_8_pt_2() {
+        let lines = safe_lines("input/day_8.txt").unwrap();
+        let values = day8::solution_pt2(lines).unwrap();
+        println!("Day 8 Part 2: {}", values)
+    }
+
+    #[test]
+    fn day_9_pt_1() {
+        let lines = safe_lines("input/day_9.txt").unwrap();
+        let values = day9::solution_pt1(lines).unwrap();
+        println!("Day 9 Part 1: {}", values)
+    }
+
+    #[test]
+    fn day_9_pt_2() {
+        let lines = safe_lines("input/day_9.txt").unwrap();
+        let values = day9::solution_pt2(lines).unwrap();
+        println!("Day 9 Part 2: {}", values)
+    }
+
+    #[test]
+    fn day_10_pt_1() {
+        let lines = safe_lines("input/day_10.txt").unwrap();
+        let values = day_10::solution_pt1(lines).unwrap();
+        println!("Day 10 Part 1: {}", values)
+    }
+
+    #[test]
+    fn day_10_pt_2() {
+        let lines = safe_lines("input/day_10.txt").unwrap();
+        let values = day_10::solution_pt2(lines).unwrap();
+        println!("Day 10 Part 2: \n{}", values)
     }
 }

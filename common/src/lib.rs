@@ -4,6 +4,7 @@ use std::io::{BufRead, BufReader, Result};
 use std::path::Path;
 
 pub mod errors;
+pub mod strings;
 pub mod vec;
 
 /// produces an iterator of lines from a file
