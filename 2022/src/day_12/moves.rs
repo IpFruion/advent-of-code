@@ -1,3 +1,6 @@
+use std::fmt::Display;
+
+#[derive(Debug)]
 pub enum Direction {
     Up,
     Down,
@@ -6,11 +9,20 @@ pub enum Direction {
 }
 
 /// (0, 0) is top left of the grid
+#[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Pos {
-    x: usize,
-    y: usize,
+    pub r: usize,
+    pub c: usize,
 }
 
 impl From<(usize, usize)> for Pos {
-    fn from(x: (usize, usize)) -> Self {}
+    fn from((r, c): (usize, usize)) -> Self {
+        Pos { r, c }
+    }
+}
+
+impl Display for Pos {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "({}, {})", self.r, self.c)
+    }
 }
