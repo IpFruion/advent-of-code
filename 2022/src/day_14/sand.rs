@@ -5,6 +5,7 @@ use super::{direction::Direction, path::Path, point::Point};
 pub struct SandProducer {
     entry: Point,
     current: Point,
+    //TODO: optimize using BTreeSet
     blocked_points: HashSet<Point>,
     sand: Vec<Point>,
     abyss: usize,
