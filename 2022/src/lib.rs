@@ -24,6 +24,8 @@ pub mod day_12;
 pub mod day_13;
 pub mod day_14;
 pub mod day_15;
+pub mod day_16;
+pub mod day_17;
 
 #[cfg(test)]
 mod tests {
@@ -31,7 +33,7 @@ mod tests {
 
     use crate::{
         day1, day2, day3, day4, day5, day6, day7, day8, day9, day_10, day_11, day_12, day_13,
-        day_14, day_15,
+        day_14, day_15, day_17,
     };
 
     #[test]
@@ -244,5 +246,19 @@ mod tests {
         let lines = safe_lines("input/day_15.txt").unwrap();
         let values = day_15::solution_pt2(lines, 4_000_000).unwrap();
         println!("Day 15 Part 2: \n{}", values)
+    }
+
+    #[test]
+    fn day_17_pt_1() {
+        let line = safe_lines("input/day_17.txt").unwrap().next().unwrap();
+        let values = day_17::solution_pt1(line, 2022).unwrap();
+        println!("Day 17 Part 1: \n{}", values)
+    }
+
+    #[test]
+    fn day_17_pt_2() {
+        let line = safe_lines("input/day_17.txt").unwrap().next().unwrap();
+        let values = day_17::solution_pt1(line, 1_000_000_000_000).unwrap();
+        println!("Day 17 Part 1: \n{}", values)
     }
 }
