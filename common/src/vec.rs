@@ -1,5 +1,3 @@
-use std::cell::{Cell, RefCell};
-
 pub trait Indices<T> {
     fn get_indices(&self, indices: &[usize]) -> Vec<Option<&T>>;
     fn get_mut_indices(&mut self, indices: &[usize]) -> Vec<Option<&mut T>>;
